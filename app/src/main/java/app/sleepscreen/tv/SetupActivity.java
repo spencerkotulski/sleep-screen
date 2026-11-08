@@ -2,6 +2,7 @@ package app.sleepscreen.tv;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -42,15 +43,21 @@ public class SetupActivity extends Activity {
         status = Ui.text(this, 17, 0xffcccccc);
         root.addView(status);
 
-        TextView direct = Ui.row(root, 650);
-        direct.setText("Open Sleep Screen accessibility");
-        direct.setOnClickListener(v -> openServiceSettings());
         TextView standard = Ui.row(root, 650);
         standard.setText("Open accessibility settings");
         standard.setOnClickListener(v -> open(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)));
         TextView alt = Ui.row(root, 650);
-        alt.setText("Find alternate accessibility settings");
-        alt.setOnClickListener(v -> startActivity(new Intent(this, SettingsPickerActivity.class)));
+        alt.setText("Accessibility blocked? Set up");
+        alt.setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setTitle("Accessibility blocked?")
+                .setMessage("Try the direct service page or find another accessibility settings screen. Your device may still block the service.")
+                .setItems(new String[]{"Open Sleep Screen service page", "Find other accessibility settings"},
+                        (dialog, choice) -> {
+                            if (choice == 0) openServiceSettings();
+                            else startActivity(new Intent(this, SettingsPickerActivity.class));
+                        })
+                .setNegativeButton("Cancel", null)
+                .show());
         TextView info = Ui.row(root, 650);
         info.setText("Open Sleep Screen app info");
         info.setOnClickListener(v -> open(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -69,7 +76,7 @@ public class SetupActivity extends Activity {
         ScrollView sc = new ScrollView(this);
         sc.addView(root);
         setContentView(sc);
-        direct.requestFocus();
+        standard.requestFocus();
     }
 
     private void openServiceSettings() {
