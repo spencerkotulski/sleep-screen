@@ -1,14 +1,28 @@
 # Sleep Screen
 
-Sleep Screen is an independent Android TV sleep timer with an optional countdown, dimmer, blue light filter, and remote shortcut. Requires Android 9 or later.
+Sleep Screen is an early beta for Android TV and Google TV, combining a sleep timer, optional countdown overlay, dimmer, blue light filter, and remote shortcut.
 
-## Setup
-Install the APK and open Sleep Screen. Use Setup to enable its accessibility service for sleep and overlays; grant alarm and overlay access where available. Optional remote mapping uses a second accessibility service and may conflict with other key mappers. Some keys may be unavailable or reported as unknown.
+## Install the beta
+
+1. Install **Downloader by AFTVnews** on your Android TV or Google TV.
+2. Open Downloader and enter code **8672497**.
+3. Download and install the APK. Android may ask you to allow Downloader to install unknown apps.
+4. Open Sleep Screen and follow the setup screen to enable the features you want.
+
+[Download the APK on GitHub](https://github.com/spencerkotulski/sleep-screen/releases/tag/v0.1.0-beta).
+
+**Beta status:** This standalone APK is a debug build and has not been tested on a device. Sleep, HDMI-CEC, accessibility and remote mapping behavior can vary by device. The Netflix button may not be independently mappable. Remote mapping may conflict with another button mapper.
+
+## Setup and permissions
+
+The sleep accessibility service puts the device to sleep and displays optional overlays. The optional remote service listens for a user-selected button and does not read screen content. Overlay and exact-alarm access may be required for warnings and timing. Android may restrict accessibility settings for sideloaded apps.
+
+The blue light filter is a warm-colored overlay rather than a calibrated display color transform. HDMI-CEC determines whether putting the streaming device to sleep also turns off the TV.
 
 ## Build
+
 Install JDK 17 and Android SDK 34, then run `gradlew assembleDebug`.
 
 ## Attribution
-This project contains adapted code from the CleanYourTV sleep timer add-on by luyzfernando08 and contributors. The original repository is https://github.com/Gathin23/cleanyourtv. Its MIT license and copyright notice are retained in LICENSE.
 
-Blue light filtering uses a warm overlay, not a calibrated color transform. Device sleep and HDMI-CEC support vary.
+Contains adapted code from the [CleanYourTV](https://github.com/Gathin23/cleanyourtv) sleep timer add-on by luyzfernando08 and contributors. Its MIT license and copyright notice are retained in [LICENSE](LICENSE).
