@@ -27,6 +27,7 @@ public class QuickActivity extends Activity {
   cancelRow=Ui.row(panel,440);cancelRow.setText("Cancel timer");cancelRow.setOnClickListener(v->{Timer.cancel(this);show();});
   TextView settings=Ui.row(panel,440);settings.setText("Settings");settings.setOnClickListener(v->startActivity(new Intent(this,OverlaySettingsActivity.class)));
   TextView setup=Ui.row(panel,440);setup.setText("Setup and remote button");setup.setOnClickListener(v->startActivity(new Intent(this,SetupActivity.class)));
+  TextView update=Ui.row(panel,440);update.setText("Check for updates");update.setOnClickListener(v->startActivity(new Intent(this,UpdateActivity.class)));UpdateCheck.check(this,r->{if(r!=null)update.setText("Update available: "+r[0]);});
   TextView close=Ui.row(panel,440);close.setText("Close");close.setOnClickListener(v->finish());
   FrameLayout root=new FrameLayout(this);FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,Gravity.BOTTOM|Gravity.END);lp.setMargins(0,0,Ui.dp(this,36),Ui.dp(this,36));android.widget.ScrollView sc=new android.widget.ScrollView(this); sc.setFillViewport(false); sc.addView(panel); root.addView(sc,lp);setContentView(root);timerRow.requestFocus(); }
  @Override protected void onResume(){super.onResume();choice=currentChoice();show();}
